@@ -1,12 +1,12 @@
 ---
 layout: default
 ---
+<time>{{ page.date | date_to_string }}</time>
 <h1>{{ page.title }}
   {% if page.lang == "fr" %}
     <small>{% include french_flag.html %}</small>
-  {% endif %}</h1>
-<p class="meta">{{ page.date | date_to_string }}</p>
-{{page.lang_fr}}
+  {% endif %}
+</h1>
 <div class="post">
 {{ content }}
 </div>

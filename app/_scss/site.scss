@@ -13,11 +13,6 @@ body
 
   h2 { font-size: 30px; font-size: 1.875rem; }
 
-
-  // p
-  // {
-  //   line-height: 1.525em;
-  // }
   .site-logo
   {
     padding: 12px;
@@ -33,9 +28,6 @@ body
     padding: 27px 21px;
     a
     {
-      // $base-color: #7891AD;
-      // darken( $base-color, 10% ) 
-      // darken(#7891AD, 20%)
       color:#9EB4CC;
       &:hover
       {
@@ -45,11 +37,6 @@ body
     }
   }
 
-  .picto
-  {
-    // float: left;
-    // margin-right: 6px;    
-  }
 
   .brand
   {
@@ -71,6 +58,14 @@ body
     }
   }
 
+  pre code {
+    display: block;
+    font-family: Menlo, Monaco, Consolas, monospace;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
   .coffee-maker {
     background-image: url(/img/coffee-maker.svg);
     display: inline-block;
@@ -79,20 +74,5 @@ body
     background-repeat: no-repeat;
     background-size: contain;
   }
-    // .flag-icon-fr 
-    // {
-    //   background-image: url(../img/french-flag.svg);
-    // }
 
-    // .flag-icon 
-    // {
-    //   display: inline-block;
-    //   width: 20px;
-    //   background-size: contain;
-    //   background-repeat: no-repeat;
-    //   height: 15px;
-    //   margin-left: 20px;
-    //   margin-bottom: 6px;
-    // }
-    
 }
