@@ -71,7 +71,14 @@ body
     }
   }
 
-
+  .coffee-maker {
+    background-image: url(/img/coffee-maker.svg);
+    display: inline-block;
+    width: 55px;
+    height: 65px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
     // .flag-icon-fr 
     // {
     //   background-image: url(../img/french-flag.svg);

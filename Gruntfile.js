@@ -253,12 +253,18 @@ module.exports = function (grunt) {
             'img/**/*',
             'fonts/**/*',
             // Like Jekyll, exclude files & folders prefixed with an underscore.
-            '!**/_*{,/**}'
+            '!**/_*{,/**}',
             // Explicitly add any files your site needs for distribution here.
             //'_bower_components/jquery/jquery.js',
             //'favicon.ico',
             //'apple-touch*.png'
           ],
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>/_bower_components/flag-icon-css',
+          src: ['flags/**/fr.svg'],
           dest: '<%= yeoman.dist %>'
         }]
       },
@@ -354,8 +360,8 @@ module.exports = function (grunt) {
     'clean:server',
     'jekyll:check',
     'sass:server',
-    'jshint:all',
-    'csslint:check'
+    'jshint:all'
+    // 'csslint:check'
   ]);
 
   grunt.registerTask('build', [
