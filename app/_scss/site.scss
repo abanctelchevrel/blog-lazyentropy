@@ -1,0 +1,91 @@
+// @import "typeplate.scss";
+
+html { font-size: 18px; line-height: 1.625em; }
+body
+{
+
+  .row 
+  {
+    padding: 0 20px;
+  }
+
+  h1 { font-size: 42px; font-size: 2.625rem; }
+
+  h2 { font-size: 30px; font-size: 1.875rem; }
+
+
+  // p
+  // {
+  //   line-height: 1.525em;
+  // }
+  .site-logo
+  {
+    padding: 12px;
+    background-color: #c03d20;
+    padding: 30px 15px;
+    text-align: center; 
+  }
+
+  .site-description
+  {
+    background-color: #36414D; 
+    color:#7891AD;
+    padding: 27px 21px;
+    a
+    {
+      // $base-color: #7891AD;
+      // darken( $base-color, 10% ) 
+      // darken(#7891AD, 20%)
+      color:#9EB4CC;
+      &:hover
+      {
+        color:#CBDDF1;
+        
+      }
+    }
+  }
+
+  .picto
+  {
+    // float: left;
+    // margin-right: 6px;    
+  }
+
+  .brand
+  {
+    font-family: 'Raleway', sans-serif;
+    color: #FFF;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    display: block;
+    margin-top: 7px;
+    
+  }
+
+  .content
+  {
+    padding: 10px;
+    h1
+    {
+      color: #D04526 
+    }
+  }
+
+
+    .flag-icon-fr 
+    {
+      background-image: url(../img/french-flag.svg);
+    }
+
+    .flag-icon 
+    {
+      display: inline-block;
+      width: 20px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 15px;
+      margin-left: 20px;
+      margin-bottom: 6px;
+    }
+    
+}
