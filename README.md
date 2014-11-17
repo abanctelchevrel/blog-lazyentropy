@@ -5,6 +5,6 @@
 #### grunt serve
 ```
 grunt
-rsync -azP dist/* antoine@IP:/home/antoine/blog
+rsync -azP dist/* antoine@91.121.158.55:/home/antoine/blog
 
 ```
