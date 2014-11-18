@@ -12,7 +12,36 @@ Monter l'exemple d'une directive qui récupère de la donnée du serveur et qui 
 Montrer comment déplacer la données hardcodée dans le httpBackend. 
 
 Montrer d'abord un exemple simple (récupération d'une liste d'items via un GET sur /items). Puis des exemples plus compliqués (POST, GET sur /items/:id ...)
+{% highlight js %}
+  //friend-list.js
+  myApp.directive('friendList', function () {
+    return {
+      templateUrl: 'views/template/friend-list.html',
+      restrict: 'E',
+      link: function postLink(scope, element, attrs) {
+        scope.friendList = [{
+            name: "Antoine",
+            status: "Cooking",
+            id: 1
+        }, {
+            name: "David",
+            status: "Idle...",
+            id: 2
+        }];
+      }
+    };
+  });
+{% endhighlight %}
 
-<div class="focal-point up-3">
-    <div><img src="http://placehold.it/574x350"></div>
+
+{% highlight html %}
+<!-- views/template/friend-list.html -->
+<div class="list-group">
+  <a ng-href="/#/friends/{{friend.id}}" class="list-group-item" ng-repeat="friend in friendList">
+    <h4 class="list-group-item-heading">{{friend.name}}</h4>
+    <p class="list-group-item-text">{{friend.status}}</p>
+  </a>
 </div>
+{% endhighlight %}
+
+
