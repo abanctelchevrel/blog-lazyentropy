@@ -57,11 +57,19 @@ body
       color: #D04526 
     }
   }
+  code {
+    font-family: Menlo, Monaco, Consolas, monospace;
+    line-height: 1.5;
+    color: #616694;
+    padding: 3px;
+  }
+  
+  pre {
+    margin: 1em 0;
+  }
 
   pre code {
     display: block;
-    font-family: Menlo, Monaco, Consolas, monospace;
-    line-height: 1.5;
     border: 1px solid #ccc;
     padding: 10px;
   }
