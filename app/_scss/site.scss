@@ -62,9 +62,14 @@ body
     }
 
     a {
-      text-decoration: underline;
       code {
         color: #d04526;
+      }
+    }
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

@@ -1,22 +1,10 @@
 ---
 layout: post
 title:  "Mocked REST API in an Angular app : $httpBackend"
-date:   2014-11-14 08:53:57
-categories: jekyll update
+date:   2014-11-20
+categories: blog
 ---
-<!-- 
-Expliquer les différences entre [ngMockE2E.$httpBackend](https://docs.angularjs.org/api/ngMockE2E/service/$httpBackend) et [ngMock.$httpBackend](https://docs.angularjs.org/api/ngMock/service/$httpBackend).
 
-Monter l'exemple d'une directive qui récupère de la donnée du serveur et qui l'affiche. La donnée de test est hardcodée dans la directive, alors qu'en vrai cette donnée est récupérée du serveur.
-
-Montrer comment déplacer la données hardcodée dans le httpBackend. 
-
-Expliquer avantage, comme ajouter une latence "real world".
-
-Montrer d'abord un exemple simple (récupération d'une liste d'items via un GET sur /items). Puis des exemples plus compliqués (POST, GET sur /items/:id ...)
- -->
-
-TODO : ajouter un JSFiddle
 ## The problem
 Say you're implementing a directive that fetch a friend list from a server and displays it. In such situation it's recommended to test your code with fake data, for tweaking the UI or to test edge cases, and you end up with code like that :
 
@@ -206,10 +194,12 @@ myApp.run(function ($httpBackend, mockGetAllFriends, mockGetAFriend) {
 {% endhighlight %}
 
 
-## Conclusion
+## The end
+
 
 That's it, you have a nice place where to store all your fake data logic. Exclude this file from your build script and never get busy finding and commenting fake data in your codebase again. Your directive and controllers won't see the difference !
 
+__A JSFiddle of the demo is available [here](http://jsfiddle.net/antoinebc/sr5wL02a/).__
 
 __NB__ : Of course it only works if all your Ajax call are made through the ```$http``` service. If a part of your code uses an external library that relies on its own XHR implementation you'll have to find another solution.
 
