@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Mocked API in an Angular app : $httpBackend"
+title:  "Mocked REST API in an Angular app : $httpBackend"
 date:   2014-11-14 08:53:57
 categories: jekyll update
 ---
-
+<!-- 
 Expliquer les différences entre [ngMockE2E.$httpBackend](https://docs.angularjs.org/api/ngMockE2E/service/$httpBackend) et [ngMock.$httpBackend](https://docs.angularjs.org/api/ngMock/service/$httpBackend).
 
 Monter l'exemple d'une directive qui récupère de la donnée du serveur et qui l'affiche. La donnée de test est hardcodée dans la directive, alors qu'en vrai cette donnée est récupérée du serveur.
@@ -14,8 +14,11 @@ Montrer comment déplacer la données hardcodée dans le httpBackend.
 Expliquer avantage, comme ajouter une latence "real world".
 
 Montrer d'abord un exemple simple (récupération d'une liste d'items via un GET sur /items). Puis des exemples plus compliqués (POST, GET sur /items/:id ...)
-#### The problem
-Say you're implementing a directive that fetch a frien list from a server and displays it. In such situation it's recommended to test your code with fake data, for tweaking the UI or to test edge cases, and you end up with code like that :
+ -->
+
+TODO : ajouter un JSFiddle
+## The problem
+Say you're implementing a directive that fetch a friend list from a server and displays it. In such situation it's recommended to test your code with fake data, for tweaking the UI or to test edge cases, and you end up with code like that :
 
 {% highlight js %}
 //friend-list.js
@@ -26,7 +29,8 @@ myApp.directive('friendList', function () {
     link: function postLink(scope, element, attrs) {
       var devMode = true;
       if (devMode) {
-        // Below is the hardcoded fake data that help you test during development : 
+        // Below is the hardcoded fake data that help you test 
+        // during development : 
         scope.friendList = [{
           name: "Antoine",
           status: "Cooking",
@@ -47,30 +51,19 @@ myApp.directive('friendList', function () {
 
 {% endhighlight %}
 
+See the ``` if (devMode) { ... }``` part ? It's here only for development purpose.
+When you're finished you'll have to remember to switch ``` var devMode = false ```, or comment it out. And it will stay here, polluting your directive's code. 
 
-{% highlight html %}
-{% raw %}
-<!-- views/template/friend-list.html -->
-<div class="list-group">
-  <a ng-href="/#/friends/{{friend.id}}" class="list-group-item" ng-repeat="friend in friendList">
-    <h4 class="list-group-item-heading">{{friend.name}}</h4>
-    <p class="list-group-item-text">{{friend.status}}</p>
-  </a>
-</div>
-{% endraw %}
-{% endhighlight %}
+__Wouldn't it be great to have a unique place where to handle all your "stubb" data that you use only for development purpose ?__
 
-See the ``` if (devMode) { ... }``` part ? It's here for development purpose.
-When you're finished you'll have to remember to switch ``` var devMode = false ```, or comment it out. And it will stay here, polluting your directive's code. Wouldn'it be great to have a unique place where to handle all your "stubb" data that you use only for development purpose ?
+## Meet [`ngMockE2E.$httpBackend`](https://docs.angularjs.org/api/ngMockE2E/service/$httpBackend)
 
-#### Meet ngMockE2E.$httpBackend
+Angular has a nice and elegant way to do just that : [the ```$httpBackend```service](https://docs.angularjs.org/api/ngMockE2E/service/$httpBackend). It takes advantage of the neat dependency injection structure of the library by proxying all Ajax calls made with ```$http```. __This way you can catch an API call before it's actually made, and pass it a fake response.__ Let's see how it works.
 
-Angular has a nice ways to do just that : the ```$httpBackend```service. It takes advantage of the neat dependency injection structure of the library by proxying all Ajax calls made with ```$http```. This way you can catch an API call before it's actually made, and pass it a fake response. Let's see how it works.
+First you have to add the `ngMock` source code to your app.
 
-First you have to add the ngMock source code to your app.
-
-*   download it : `bower install angular-mocks`
-*   add it to your page :
+1.  download it : `bower install angular-mocks`
+2.  add it to your page and to your app dependencies:
 {% highlight html %}
 {% raw %}
 <!-- index.html -->
@@ -81,9 +74,17 @@ First you have to add the ngMock source code to your app.
 {% endraw %}
 {% endhighlight %}
 
-#### Handle a simple `GET /items request
+{% highlight js %}
+//app.js
+angular.module('myApp', [
+  'ngRoute',
+  'ngMockE2E' //<-- 
+])
+{% endhighlight %}
 
-In this case we want the fake backend to respond a list of friends when a `GET /friends` request is made
+## Handle a simple `GET /items` request
+
+In this case we want the fake backend to respond with a list of friends when a `GET /friends` request is made :
 
 {% highlight js %}
 //app.js
@@ -112,8 +113,10 @@ For convenience we store the data in a external service.
 //app.js
 myApp.run(function ($httpBackend, mockGetAllFriends) {
   $httpBackend.whenGET(/views\/.*/).passThrough();
+
   $httpBackend.whenGET(/friends$/)
     .respond(mockGetAllFriends.get());
+
 }).factory('mockGetAllFriends', function () {
   var results = [{
     name: 'Antoine',
@@ -134,39 +137,48 @@ myApp.run(function ($httpBackend, mockGetAllFriends) {
 });
 {% endhighlight %}
 
-Given that all your Ajax call are made through the ```$http``` service.
 
-#### Handle "GET /items/:id" request
+## Handle a `GET /items/:id` request
 
-Now we want the fake backend to respond a single friend when a `GET /friends/:id` request is made.
+Now we want the fake backend to respond with a single friend when a `GET /friends/:id` request is made, the expected behaviour when using a REST API.
 
-You have to teach the fake backend a new rule : 
+You have to teach the fake backend a new rule that demand a finer control on the mocked response logic. To accomplish this, __instead of just passing an object to the `respond` method we now will pass a function.__ This function must return an array (`[http_code, data]`) and will be called with three arguments :
+
+1.  The HTTP method (GET, POST ...)
+2.  The requested url
+3.  The request payload
 
 {% highlight js %}
 //app.js
 myApp.run(function ($httpBackend, mockGetAllFriends, mockGetAFriend) {
   $httpBackend.whenGET(/views\/.*/).passThrough();
+
   $httpBackend.whenGET(/friends$/)
     .respond(mockGetAllFriends.get());
+
+  // This regex matches GET /friends/:id requests
   $httpBackend.whenGET(/friends\/\w+$/)
-    .respond(function(method, url) {
+    .respond(function(method, url, params) {
+
       // Retrieve the asked id as integer ...
       var re = /.*\/friends\/(\w+)/;
-      var id = parseInt(url.replace(re, '$1'), 10);
+      var friendId = parseInt(url.replace(re, '$1'), 10);
       // ... and search it in the friend list.
-      var existingFriend = mockGetAFriend.get(id);
+      var existingFriend = mockGetAFriend.get(friendId);
       if (existingFriend) {
-        // The asked id exists in the friend list.
+        // The asked friendId exists in the friend list.
         return [200, existingFriend];
       } else {
-        // The asked id does not exist : 404 NOT FOUND
+        // The asked friendId does not exist : 404 NOT FOUND
         return [404]; 
       }
     });
+
 }).factory('mockGetAFriend', function (mockGetAllFriends) {
   return {
     get: function(friendId) {
-      //Use underscore.js findWhere to find user with requested id.
+      //I use the convenient findWhere from underscore.js to find
+      // user with requested id.
       var existingFriend = _.findWhere(mockGetAllFriends.get(), {
         id: friendId
       });
@@ -192,3 +204,13 @@ myApp.run(function ($httpBackend, mockGetAllFriends, mockGetAFriend) {
   };
 });
 {% endhighlight %}
+
+
+## Conclusion
+
+That's it, you have a nice place where to store all your fake data logic. Exclude this file from your build script and never get busy finding and commenting fake data in your codebase again. Your directive and controllers won't see the difference !
+
+
+__NB__ : Of course it only works if all your Ajax call are made through the ```$http``` service. If a part of your code uses an external library that relies on its own XHR implementation you'll have to find another solution.
+
+

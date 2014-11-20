@@ -13,6 +13,10 @@ body
 
   h2 { font-size: 30px; font-size: 1.875rem; }
 
+  strong {
+    font-weight: 600;
+  }
+
   .site-logo
   {
     padding: 12px;
@@ -56,6 +60,13 @@ body
     {
       color: #D04526 
     }
+
+    a {
+      text-decoration: underline;
+      code {
+        color: #d04526;
+      }
+    }
   }
   code {
     font-family: Menlo, Monaco, Consolas, monospace;
@@ -69,6 +80,9 @@ body
   }
 
   pre code {
+    white-space: pre; 
+    overflow: auto;
+    font-size: 0.9em;
     display: block;
     border: 1px solid #ccc;
     padding: 10px;
