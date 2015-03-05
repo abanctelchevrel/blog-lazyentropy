@@ -16,13 +16,17 @@ To mitigate this problem developers have been building fences around features th
 (insérer image http://dun4nx4d6jyre.cloudfront.net/assets/do-sure.png)
 (insérer image http://dun4nx4d6jyre.cloudfront.net/assets/mc-undo.png)
 
-Those fences do a good job at preventing mistake, but sometime they do a good job at sabotaging the user experience too.
+Those modal popup do a good job at preventing you from inadvertendly clicking this "delete" button, but sometime they do a good job at sabotaging the user experience too.
 
 ## Here comes the hold button.
 
 The hold button (or long-press button) made a big appearance on the UX stage in the shadow of the rising mobile devices adoption. Hold to copy, hold to expand ... are now natural gesture when using a mobile interface, becoming the mobile equivalent to the right click of your mouse. As mobile slowly increases its take on how people uses software, it is not surprising to see a mobile UI components, like the hold button, being used in a traditional web environment.
 
+(insérer image http://i.stack.imgur.com/lRTUq.jpg )
 
+http://ux.stackexchange.com/a/50782/17281
+
+Pros and cons of the hold button are that it's unobstrusive and doesn't take up UI real estate, but there are no clues that the long press exist. To fix this a long-press button must give you a feedback that something will happen if you hold it long enough.
 
 
 <!-- 
