@@ -1,26 +1,27 @@
 ---
 layout: post
-title:  "A hold button in Angular"
+title:  "A hold button with feedback in Angular"
 date:   2014-11-14 08:53:57
 categories: blog
 ---
 
 ## The problem
 
-When was the last time you saw a proper implementation of the "Undo" feature in a web application ? In [this article](http://sachagreif.com/undo/) Sacha Greif made a famous rant about the lost art of undoing things, and urges developer to _give us “undo” back._ 
+When was the last time you saw a clean implementation of the "Undo" feature in a web application ? In [this article](http://sachagreif.com/undo/) Sacha Greif made a famous rant about the lost art of undoing things, and urges developer to _give us “undo” back._ 
 
-But he misses a point : undo in a webapp is hard. How do yout rollback an email sending (Gmail just delays it 30s) ? 
+But he misses a point : undo in a webapp is hard. How do yout rollback an email sending ? _Hint : you can't. Gmail just delays it 30s_ 
 
 To mitigate this problem developers have been building fences around features that have a critical impact, like irreversible deletion.
 
 (insérer image http://dun4nx4d6jyre.cloudfront.net/assets/do-sure.png)
 (insérer image http://dun4nx4d6jyre.cloudfront.net/assets/mc-undo.png)
 
-Those fences do a good job at preventing mistake, but they do better job at sabotaging the user experience.
+Those fences do a good job at preventing mistake, but sometime they do a good job at sabotaging the user experience too.
 
-Here comes the hold button.
+## Here comes the hold button.
 
-Hold button (or long-press button) made a big appearance on the UX stage in the rise of mobile devices adoption. Hold to copy, hold to expand ... became natural gesture when using a mobile interface. But hey have their place in a web interface too.
+The hold button (or long-press button) made a big appearance on the UX stage in the shadow of the rising mobile devices adoption. Hold to copy, hold to expand ... are now natural gesture when using a mobile interface, becoming the mobile equivalent to the right click of your mouse. As mobile slowly increases its take on how people uses software, it is not surprising to see a mobile UI components, like the hold button, being used in a traditional web environment.
+
 
 
 
