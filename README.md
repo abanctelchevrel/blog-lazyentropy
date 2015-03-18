@@ -2,6 +2,9 @@
 
 ## Workflow
 
+
+Pour ajouter un fichier js, le mettre dans Grunt -> copy:dist
+
 #### grunt serve
 ```
 grunt

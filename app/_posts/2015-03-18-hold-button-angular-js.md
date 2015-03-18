@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A hold button with feedback in Angular"
-date:   2015-03-14 12:00:00
+date:   2015-03-18
 categories: blog
 ---
 
@@ -63,7 +63,7 @@ So this is the HTML API of the directive. Mind the `$promise` param passed to `o
 {% endhighlight %}
 
 
-The `onHoldShortStart` function passed to the directive is passed a promise. This promise is resolved if the user hold the click long enough. Else the promise is rejected, and the button comes back to its inital state. In this example the progression is rendered with a 'linear-gradient' used as background-image.
+The `onHoldShortStart` function passed to the directive is called with a promise as second param. This promise is resolved if the user hold the click long enough. If the click is not holded enough the promise is rejected, and the button comes back to its inital state. In this example the progression is rendered with a 'linear-gradient' used as background-image.
 
 {% highlight js %}
 //app.js
