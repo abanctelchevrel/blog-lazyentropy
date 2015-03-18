@@ -1,3 +1,4 @@
+/*global angular:false */
 angular.module('HoldButtonDemo', ['HoldButton'])
   .controller('DemoCtrl', function($scope) {
     $scope.isLongActionDone = false;
@@ -8,28 +9,28 @@ angular.module('HoldButtonDemo', ['HoldButton'])
       }, function(reason) {
         $scope.holdLongStyle = {
           'background-image': 'inherit'
-        }
+        };
       }, function(update) {
         //Move the background-image, looking like a progress bar.
         $scope.holdLongStyle = {
           'background-image': 'linear-gradient(to right, #1A1A1A ' + update * 100 + '%, transparent ' + update * 100 + '%)'
-        }
-      })
-    }
+        };
+      });
+    };
     $scope.onHoldShortStart = function($event, $promise) {
       $promise.then(function(success) {
         $scope.isShortActionDone = !$scope.isShortActionDone;
       }, function(reason) {
         $scope.holdShortStyle = {
           'background-image': 'inherit'
-        }
+        };
       }, function(update) {
         //Move the background-image, looking like a progress bar.
         $scope.holdShortStyle = {
           'background-image': 'linear-gradient(to right, #1A1A1A ' + update * 100 + '%, transparent ' + update * 100 + '%)'
-        }
-      })
-    }
+        };
+      });
+    };
   });
 
 angular.module('HoldButton', []).directive('holdButton', function($parse, $q, $interval) {
@@ -50,7 +51,6 @@ angular.module('HoldButton', []).directive('holdButton', function($parse, $q, $i
 
         // Call the onTick function `nbTick` times every `tickDelay` ms.
         // stop is the stopper function 
-        stop = $interval(onTick, tickDelay, nbTick);
         function onTick() {
           counter++;
           deferred.notify((counter + 1) / nbTick);
@@ -59,8 +59,9 @@ angular.module('HoldButton', []).directive('holdButton', function($parse, $q, $i
             deferred.resolve();
           }
         }
+        stop = $interval(onTick, tickDelay, nbTick);
 
-        if (typeof onHoldStart == 'function' || false) {
+        if (typeof onHoldStart === 'function' || false) {
           // The function passed as directive parameter is passed the special parameter `$promise`
           // which is the promise resolved after the hold is completed. 
           onHoldStart(scope, {
@@ -76,7 +77,7 @@ angular.module('HoldButton', []).directive('holdButton', function($parse, $q, $i
         if (deferred) {
           deferred.reject($event);
         }
-      })
+      });
     }
   };
 });

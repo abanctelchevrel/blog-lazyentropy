@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A hold button with feedback in Angular"
-date:   2014-11-14 08:53:57
+date:   2015-03-14 12:00:00
 categories: blog
 ---
 
@@ -22,7 +22,7 @@ To mitigate this problem developers have been building fences (also know as ["Ar
 ![Are you sure ?](http://dun4nx4d6jyre.cloudfront.net/assets/do-sure.png "Are you sure ?")
 ![Type to confirm](http://www.questioningdesigns.com/wp-content/uploads/2014/03/mailchimp-delete-action.png "Type to confirm")
 
-Those modal popup do a good job at preventing you from inadvertendly clicking this "delete" button, but sometime they do a good job at sabotaging the user experience too.
+Those modal popup do a good job at preventing you from inadvertendly clicking a "delete" button, but sometime they do a good job at sabotaging the user experience too.
 
 ## Here comes the hold button.
 
